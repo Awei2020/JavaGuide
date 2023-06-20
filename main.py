@@ -9,7 +9,7 @@ path = os.getcwd()
 files = os.listdir(path)
 #判断文件是否在当前目录下
 uri = ""
-if 'go.mod'  in files:
+if 'go.mod' in files:
     uri = "go.mod"
 elif 'package.json' in files:
     uri = "package.json"
@@ -18,7 +18,7 @@ elif 'pom.xml' in files:
 elif 'requirements.txt' in files:
     uri = "requirements.txt"
 elif 'composer.json' in files:
-    uri =  "composer.json"
+    uri = "composer.json"
 elif 'Gemfile' in files:
     uri = "Gemfile"
 elif 'build.gradle' in files:
@@ -55,6 +55,9 @@ elif 'builds.lock' in files:
 results = []
 with open('scan_results.json', 'r', encoding="utf_8") as f:
     murphy_date = json.load(f)
+#判断murphy_date漏洞字段是否为空 为空表示项目安全，无需生成sarif文件
+if murphy_date["issues_level_count"] == {}:
+    exit()
 sarif = {}
 #向safi添加数据
 sarif["$schema"] = "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json"
