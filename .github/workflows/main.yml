@@ -23,7 +23,7 @@ jobs:
           if [ -f "results.json" ]; then
             echo "file_exists=true" >> $GITHUB_ENV
           else
-            echo "file_exists=true" >> $GITHUB_ENV
+            echo "file_exists=false" >> $GITHUB_ENV
           fi
       - name: Upload SARIF file
         if: env.file_exists == 'true'
